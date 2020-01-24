@@ -67,9 +67,15 @@ int main(int argc, char **argv)
             in_video.open(videoInput); // url
         } else {
             in_video.open(source); // id
+            in_video.set(cv::CAP_PROP_FRAME_WIDTH,640);
+            in_video.set(cv::CAP_PROP_FRAME_HEIGHT,480);
+	    
         }
     } else {
         in_video.open(0);
+  	in_video.set(cv::CAP_PROP_FRAME_WIDTH,640);
+        in_video.set(cv::CAP_PROP_FRAME_HEIGHT,480);
+        
     }
 
     if (!parser.check()) {
@@ -93,7 +99,7 @@ int main(int argc, char **argv)
         std::vector<int> ids;
         std::vector<std::vector<cv::Point2f>> corners;
         cv::aruco::detectMarkers(image, dictionary, corners, ids);
-        
+       
         // If at least one marker detected
         if (ids.size() > 0)
             cv::aruco::drawDetectedMarkers(image_copy, corners, ids);
@@ -102,6 +108,8 @@ int main(int argc, char **argv)
         char key = (char)cv::waitKey(wait_time);
         if (key == 27)
             break;
+	double fps = in_video.get(cv::CAP_PROP_FPS);
+        std::cout << "Frames per second: " << fps << std::endl;
     }
 
     in_video.release();

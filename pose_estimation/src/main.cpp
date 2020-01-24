@@ -25,7 +25,7 @@
 #include <opencv2/aruco.hpp>
 #include <iostream>
 #include <cstdlib>
-
+#define CV_AA cv::LINE_AA
 
 namespace {
 const char* about = "Pose estimation of ArUco marker images";
@@ -43,6 +43,7 @@ const char* keys  =
         "{v        |<none>| Custom video source, otherwise '0' }"
         ;
 }
+
 
 int main(int argc, char **argv)
 {
@@ -146,22 +147,22 @@ int main(int argc, char **argv)
                 vector_to_marker << std::setprecision(4)
                                  << "x: " << std::setw(8) << tvecs[0](0);
                 cv::putText(image_copy, vector_to_marker.str(),
-                            cvPoint(10, 30), cv::FONT_HERSHEY_SIMPLEX, 0.6,
-                            cvScalar(0, 252, 124), 1, CV_AA);
+                            cv::Point(10, 30), cv::FONT_HERSHEY_SIMPLEX, 0.6,
+                            cv::Scalar(0, 252, 124), 1, CV_AA);
 
                 vector_to_marker.str(std::string());
                 vector_to_marker << std::setprecision(4)
                                  << "y: " << std::setw(8) << tvecs[0](1);
                 cv::putText(image_copy, vector_to_marker.str(),
-                            cvPoint(10, 50), cv::FONT_HERSHEY_SIMPLEX, 0.6,
-                            cvScalar(0, 252, 124), 1, CV_AA);
+                            cv::Point(10, 50), cv::FONT_HERSHEY_SIMPLEX, 0.6,
+                            cv::Scalar(0, 252, 124), 1, CV_AA);
 
                 vector_to_marker.str(std::string());
                 vector_to_marker << std::setprecision(4)
                                  << "z: " << std::setw(8) << tvecs[0](2);
                 cv::putText(image_copy, vector_to_marker.str(),
-                            cvPoint(10, 70), cv::FONT_HERSHEY_SIMPLEX, 0.6,
-                            cvScalar(0, 252, 124), 1, CV_AA);
+                            cv::Point(10, 70), cv::FONT_HERSHEY_SIMPLEX, 0.6,
+                            cv::Scalar(0, 252, 124), 1, CV_AA);
             }
         }
 
